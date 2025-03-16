@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class MySort {
+
+    public static void minMaxSort(int[] arr, int left, int right) {
+        while (left < right) {
+            int minIndex = left, maxIndex = left;
+
+            for (int i = left; i <= right; i++) {
+                if (arr[i] < arr[minIndex]) minIndex = i;
+                if (arr[i] > arr[maxIndex]) maxIndex = i;
+            }
+
+            swap(arr, left, minIndex);
+
+            if (maxIndex == left) maxIndex = minIndex;
+            
+            swap(arr, right, maxIndex);
+            left++;
+            right--;
+        }
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+
+        System.out.println("Enter elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        minMaxSort(arr, 0, n - 1);
+
+        System.out.println("Sorted Array: " + Arrays.toString(arr));
+
+        scanner.close();
+    }
+}
